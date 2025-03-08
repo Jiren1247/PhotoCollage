@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import SBConversation from "@sendbird/uikit-react/Channel";
-import SBChannelList from "@sendbird/uikit-react/ChannelList";
+// import SBConversation from "@sendbird/uikit-react/Channel";
+// import SBChannelList from "@sendbird/uikit-react/ChannelList";
 import SBChannelSettings from "@sendbird/uikit-react/ChannelSettings";
+import GroupChannel from "@sendbird/uikit-react/GroupChannel";
+import GroupChannelList from "@sendbird/uikit-react/GroupChannelList";
+
 import IconArrowLeft from "./icon-arrow-left.svg";
 function MobileView() {
   const [showSettings, setShowSettings] = useState(false);
@@ -25,8 +28,9 @@ function MobileView() {
     <div className="mobile-view__wrap">
       {!currentChannelUrl ? (
         <div className="sendbird-app__channellist-wrap">
-          <SBChannelList
+          <GroupChannelList
             onChannelSelect={(channel) => {
+              console.log("Selected channel Mobile:", channel);
               if (channel && channel.url) {
                 setCurrentChannelUrl(channel.url);
               }
@@ -39,7 +43,7 @@ function MobileView() {
           <button className="back-button" onClick={onBack}>
             <img width={20} heigth={20} src={IconArrowLeft} alt="Back button" />
           </button>
-          <SBConversation
+          <GroupChannel
             channelUrl={currentChannelUrl}
             onChatHeaderActionClick={() => {
               setShowSettings(true);

@@ -11,6 +11,7 @@ function App() {
   const USER_ID = process.env.REACT_APP_USER_ID;
   const NICKNAME = process.env.REACT_APP_NICKNAME;
   const ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN;
+
   const myColorSet = {
     "--sendbird-light-primary-100": "rgb(195, 241, 169)",
     "--sendbird-light-primary-300": "rgb(165, 211, 149)",
@@ -41,8 +42,9 @@ function App() {
       nickname={NICKNAME}
       accessToken={ACCESS_TOKEN}
       colorSet={myColorSet}
+      isMultipleFilesMessageEnabled={true}
     >
-      {mobileViewOpen ? <MobileView /> : <DesktopView />}
+      {mobileViewOpen ? <MobileView/> : <DesktopView/>}
     </SBProvider>
   );
 }

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import SBConversation from "@sendbird/uikit-react/Channel";
-import SBChannelList from "@sendbird/uikit-react/ChannelList";
+
+import GroupChannel from "@sendbird/uikit-react/GroupChannel";
+import GroupChannelList from "@sendbird/uikit-react/GroupChannelList";
 import SBChannelSettings from "@sendbird/uikit-react/ChannelSettings";
+// import { useEffect } from "react";
+// import { sendbirdSelectors } from "@sendbird/uikit-react";
+// import { useSendbirdStateContext } from "@sendbird/uikit-react";
 
 function DesktopView() {
   const [showSettings, setShowSettings] = useState(false);
@@ -20,8 +24,9 @@ function DesktopView() {
   return (
     <div className="sendbird-app__wrap">
         <div className="sendbird-app__channellist-wrap">
-          <SBChannelList
+          <GroupChannelList
             onChannelSelect={(channel) => {
+              console.log("Selected channel:", channel);
               if (channel && channel.url) {
                 setCurrentChannelUrl(channel.url);
               }
@@ -29,12 +34,15 @@ function DesktopView() {
           />
         </div>
         <div className="sendbird-app__conversation-wrap">
-          <SBConversation
+          <GroupChannel
             channelUrl={currentChannelUrl}
             onChatHeaderActionClick={() => {
               setShowSettings(true);
               renderSettingsBar();
             }}
+            // onBeforeSendFileMessage={(file) => {
+            //   sendFileMessage(file);
+            // }}
           />
           {showSettings && (
             <div className="sendbird-app__settingspanel-wrap">
